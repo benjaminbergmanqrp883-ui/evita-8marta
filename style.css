@@ -1,0 +1,523 @@
+/* ===== Базовые стили ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Comfortaa', cursive;
+    background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 30%, #e8eaf6 60%, #e1f5fe 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: #4a148c;
+}
+
+/* ===== Падающие лепестки ===== */
+#petals-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.petal {
+    position: absolute;
+    font-size: 1.5rem;
+    animation: fall linear infinite;
+    opacity: 0.7;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-50px) rotate(0deg);
+        opacity: 0;
+    }
+    10% { opacity: 0.7; }
+    90% { opacity: 0.7; }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ===== Экраны ===== */
+.screen {
+    display: none;
+    min-height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+    animation: fadeIn 0.8s ease;
+}
+
+.screen.active {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Конверт ===== */
+.envelope {
+    position: relative;
+    width: 340px;
+    height: 240px;
+    cursor: pointer;
+    margin-bottom: 30px;
+    animation: float 3s ease-in-out infinite;
+    transition: transform 0.3s;
+}
+
+.envelope:hover {
+    transform: scale(1.05);
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+.envelope-body {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, #f8bbd0, #e91e63);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(233, 30, 99, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 170px solid transparent;
+    border-right: 170px solid transparent;
+    border-top: 120px solid #f48fb1;
+    z-index: 2;
+    transform-origin: top;
+    transition: transform 0.6s ease;
+}
+
+.envelope.opened .envelope-flap {
+    transform: rotateX(180deg);
+    z-index: 0;
+}
+
+.envelope-label {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.6rem;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.envelope-hint {
+    font-size: 0.85rem;
+    margin-top: 10px;
+    opacity: 0.85;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.envelope-from {
+    font-family: 'Pacifico', cursive;
+    font-size: 1rem;
+    margin-top: 8px;
+    opacity: 0.9;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+/* ===== Заголовки ===== */
+.title-glow {
+    font-family: 'Pacifico', cursive;
+    font-size: 3rem;
+    background: linear-gradient(135deg, #e91e63, #9c27b0, #3f51b5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from { filter: drop-shadow(0 0 8px rgba(233,30,99,0.4)); }
+    to { filter: drop-shadow(0 0 20px rgba(156,39,176,0.6)); }
+}
+
+.subtitle {
+    margin-top: 15px;
+    font-size: 1.1rem;
+    color: #6a1b9a;
+    text-align: center;
+}
+
+.from-label {
+    margin-top: 12px;
+    font-family: 'Pacifico', cursive;
+    font-size: 1.15rem;
+    color: #ad1457;
+    text-align: center;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+/* ===== Открытая открытка ===== */
+.card-opened {
+    background: #fff;
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 580px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(156, 39, 176, 0.2);
+    border: 3px solid #f8bbd0;
+    text-align: center;
+    animation: cardOpen 0.8s ease;
+}
+
+@keyframes cardOpen {
+    from { transform: scale(0.7) rotateY(90deg); opacity: 0; }
+    to { transform: scale(1) rotateY(0); opacity: 1; }
+}
+
+.card-header {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.4rem;
+    color: #e91e63;
+    margin-bottom: 20px;
+}
+
+.card-text h2 {
+    font-family: 'Pacifico', cursive;
+    color: #ad1457;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.card-text p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 12px;
+}
+
+.card-text b {
+    color: #e91e63;
+}
+
+.card-signature {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.15rem;
+    color: #ad1457;
+    margin-top: 18px;
+    text-align: right;
+    padding-right: 10px;
+}
+
+/* ===== Кнопки ===== */
+.btn-start, .btn-restart {
+    margin-top: 25px;
+    padding: 14px 36px;
+    font-family: 'Comfortaa', cursive;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, #e91e63, #9c27b0);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(233, 30, 99, 0.35);
+    transition: all 0.3s;
+}
+
+.btn-start:hover, .btn-restart:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(233, 30, 99, 0.45);
+}
+
+.btn-start:active, .btn-restart:active {
+    transform: translateY(0);
+}
+
+/* ===== Квест ===== */
+.quest-container {
+    max-width: 640px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.flowers-bar {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 20px;
+    padding: 18px 24px;
+    margin-bottom: 25px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    text-align: center;
+    width: 100%;
+}
+
+.flowers-progress {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.flower-icon {
+    font-size: 2rem;
+    filter: grayscale(1) opacity(0.3);
+    transition: all 0.5s;
+    transform: scale(0.8);
+}
+
+.flower-icon.collected {
+    filter: grayscale(0) opacity(1);
+    transform: scale(1.15);
+    animation: bloom 0.6s ease;
+}
+
+@keyframes bloom {
+    0% { transform: scale(0.8) rotate(-15deg); }
+    50% { transform: scale(1.4) rotate(10deg); }
+    100% { transform: scale(1.15) rotate(0); }
+}
+
+.progress-text {
+    font-size: 0.9rem;
+    color: #880e4f;
+    font-weight: 700;
+}
+
+.quest-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 35px 30px;
+    width: 100%;
+    box-shadow: 0 15px 50px rgba(156, 39, 176, 0.15);
+    border: 2px solid #f8bbd0;
+    text-align: center;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.quest-question {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #4a148c;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.quest-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.quest-option {
+    padding: 14px 22px;
+    font-family: 'Comfortaa', cursive;
+    font-size: 1rem;
+    color: #6a1b9a;
+    background: #fce4ec;
+    border: 2px solid transparent;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-align: left;
+}
+
+.quest-option:hover {
+    background: #f8bbd0;
+    border-color: #e91e63;
+    transform: translateX(5px);
+}
+
+.quest-option.correct {
+    background: #c8e6c9;
+    border-color: #4caf50;
+    color: #2e7d32;
+}
+
+.quest-option.wrong {
+    background: #ffcdd2;
+    border-color: #f44336;
+    color: #c62828;
+    animation: shake 0.4s;
+}
+
+.quest-option.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+}
+
+.quest-feedback {
+    margin-top: 18px;
+    font-size: 1rem;
+    min-height: 30px;
+    font-weight: 700;
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.quest-feedback.show {
+    opacity: 1;
+}
+
+.quest-feedback.correct-fb {
+    color: #2e7d32;
+}
+
+.quest-feedback.wrong-fb {
+    color: #c62828;
+}
+
+.quest-counter {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #880e4f;
+    font-weight: 700;
+}
+
+/* ===== Финал ===== */
+.final-content {
+    text-align: center;
+    max-width: 640px;
+    width: 100%;
+}
+
+.final-title {
+    font-family: 'Pacifico', cursive;
+    font-size: 2.8rem;
+    background: linear-gradient(135deg, #e91e63, #9c27b0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 20px;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+.final-bouquet {
+    font-size: 3.5rem;
+    margin: 20px 0;
+    animation: bouquetSpin 3s ease-in-out infinite;
+    letter-spacing: 5px;
+}
+
+@keyframes bouquetSpin {
+    0%, 100% { transform: scale(1) rotate(-3deg); }
+    50% { transform: scale(1.1) rotate(3deg); }
+}
+
+.final-message {
+    background: #fff;
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: 0 20px 60px rgba(156, 39, 176, 0.2);
+    border: 3px solid #f8bbd0;
+    margin-bottom: 25px;
+}
+
+.final-message h2 {
+    font-family: 'Pacifico', cursive;
+    color: #ad1457;
+    margin-bottom: 15px;
+    font-size: 1.6rem;
+}
+
+.final-message p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 12px;
+}
+
+.final-highlight {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.3rem !important;
+    color: #e91e63 !important;
+    margin-top: 20px !important;
+}
+
+.final-signature {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.4rem;
+    color: #ad1457;
+    margin-bottom: 20px;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+/* ===== Конфетти ===== */
+#confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+    overflow: hidden;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    animation: confettiFall 3s ease-out forwards;
+}
+
+@keyframes confettiFall {
+    0% {
+        transform: translateY(-20px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* ===== Адаптивность ===== */
+@media (max-width: 600px) {
+    .title-glow { font-size: 2.2rem; }
+    .final-title { font-size: 2rem; }
+    .envelope { width: 280px; height: 200px; }
+    .envelope-body { height: 165px; }
+    .envelope-flap {
+        border-left: 140px solid transparent;
+        border-right: 140px solid transparent;
+        border-top: 100px solid #f48fb1;
+    }
+    .card-opened, .quest-card { padding: 25px 20px; }
+    .quest-question { font-size: 1.1rem; }
+    .flower-icon { font-size: 1.5rem; }
+    .flowers-progress { gap: 6px; }
+}
