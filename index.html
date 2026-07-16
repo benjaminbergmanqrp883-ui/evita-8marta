@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>С 8 марта, Ёвита! 🌸 — от Бори</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Comfortaa:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Падающие лепестки -->
+<div id="petals-container"></div>
+
+<!-- ЭКРАН 1: Закрытая открытка -->
+<div id="card-screen" class="screen active">
+    <div class="envelope" id="envelope" onclick="openCard()">
+        <div class="envelope-flap"></div>
+        <div class="envelope-body">
+            <div class="envelope-label">💌 Для Ёвиты</div>
+            <div class="envelope-hint">нажми, чтобы открыть</div>
+            <div class="envelope-from">от Бори</div>
+        </div>
+    </div>
+    <h1 class="title-glow">С 8 марта!</h1>
+    <p class="subtitle">В этом маленьком послании — квест только для тебя 💖</p>
+    <p class="from-label">с любовью, Боря 💐</p>
+</div>
+
+<!-- ЭКРАН 2: Открытая открытка с сообщением -->
+<div id="message-screen" class="screen">
+    <div class="card-opened">
+        <div class="card-header">🌸 Открытка 🌸</div>
+        <div class="card-text">
+            <h2>Дорогая Ёвита!</h2>
+            <p>Сегодня — твой день. День, когда мир становится чуть мягче, весна — чуть ближе, а улыбки — чуть искреннее.</p>
+            <p>Ты — как первый весенний цветок: нежная, яркая и удивительно живая.</p>
+            <p>Я приготовил для тебя небольшой квест. Собери <b>8 весенних цветов</b>, отвечая на вопросы — и в конце тебя ждёт сюрприз 🌷</p>
+        </div>
+        <div class="card-signature">— от Бори 💕</div>
+        <button class="btn-start" onclick="startQuest()">Начать квест →</button>
+    </div>
+</div>
+
+<!-- ЭКРАН 3: Квест -->
+<div id="quest-screen" class="screen">
+    <div class="quest-container">
+        <div class="flowers-bar">
+            <div class="flowers-progress">
+                <span class="flower-icon" data-id="0">🌸</span>
+                <span class="flower-icon" data-id="1">🌷</span>
+                <span class="flower-icon" data-id="2">🌹</span>
+                <span class="flower-icon" data-id="3">🌺</span>
+                <span class="flower-icon" data-id="4">🌼</span>
+                <span class="flower-icon" data-id="5">🌻</span>
+                <span class="flower-icon" data-id="6">💐</span>
+                <span class="flower-icon" data-id="7">🏵️</span>
+            </div>
+            <div class="progress-text">Собрано: <span id="collected">0</span> / 8</div>
+        </div>
+
+        <div class="quest-card">
+            <div class="quest-question" id="question-text"></div>
+            <div class="quest-options" id="options-container"></div>
+            <div class="quest-feedback" id="feedback"></div>
+        </div>
+
+        <div class="quest-counter">Вопрос <span id="q-num">1</span> из 8</div>
+    </div>
+</div>
+
+<!-- ЭКРАН 4: Финал -->
+<div id="final-screen" class="screen">
+    <div class="final-content">
+        <h1 class="final-title">🎉 Букет собран! 🎉</h1>
+        <div class="final-bouquet">🌸🌷🌹🌺🌼🌻💐🏵️</div>
+        <div class="final-message">
+            <h2>Ёвита, ты — чудо.</h2>
+            <p>Ты прошла этот маленький квест так же, как идёшь по жизни — с лёгкостью и теплом.</p>
+            <p>Пусть каждый твой день будет наполнен весной, смехом и любовью. Ты заслуживаешь самых красивых цветов, самых тёплых слов и самого искреннего счастья.</p>
+            <p class="final-highlight">С 8 марта, самая прекрасная! 💖</p>
+        </div>
+        <div class="final-signature">с любовью, твой Боря 💐</div>
+        <button class="btn-restart" onclick="restart()">Пройти заново ↺</button>
+    </div>
+</div>
+
+<!-- Конфетти-контейнер -->
+<div id="confetti-container"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
